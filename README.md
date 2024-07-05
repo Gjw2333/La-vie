@@ -1,2 +1,6 @@
-# La-vie
-这将是我人生的一个新的阶段
+# 多任务 Embedding model 微调
+基于flagembedding finetune脚本参考piccolo2设计实现的多任务Embedding训练，并在最后进行模型融合。
+曾尝试stella原始训练脚本发现非常容易OOM，而bge微调的脚本仅支持单loss计算。因此尝试采用多loader承接不同数据集实现不同loss的处理，奈何自己是个彩笔，没有调通。
+后来发现piccolo的微调脚本非常巧妙规范，但整体训练脚本没有flagembedding简洁。因此在flagembedding上实现了piccolo的多任务loss计算。
+实验验证得知ewc loss效果与模型融合十分接近，而ewc loss参与训练容易造成OOM。因此在脚本最后加上模型融合，也等同与在训练中加入ewc loss了，且测试融合比例参数时不用重新训练
+当前上传脚本为自用版本，接口不够友好，后续会上传更加通用友好的接口和使用指南
